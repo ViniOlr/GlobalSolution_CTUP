@@ -1,3 +1,6 @@
+# Nome: Vinicius de Oliveira
+# RM: 93613
+
 registro = [{
         'mes_ano_referencia' : '10-2022',
         'total_habitantes' : 1000000,
@@ -69,11 +72,20 @@ def pesquisaAno(anoASerComparado):
     if totalHab != 0 and totalObt != 0:
         print(f'\n\tTotal de Habitantes..............: {totalHab}')
         print(f'\tTotal de óbitos..................: {totalObt}')
-        print(f'\tTaxa por 100k habitantes - {ano}..: {taxaAno}')
+        print(f'\tTaxa por 100k habitantes - {anoASerComparado}..: {taxaAno}')
         print(f'\tTaxa por 100k habitantes - 2019..: {taxa2019}')
-        print(f'\tComparativo % entre 2021-2019....: {comparativo}\n')
+        print(f'\tComparativo % entre {anoASerComparado}-2019....: {comparativo}\n')
     else:
         print(f"\n\t***** Não há dados referente a este ano *****\n")
+
+def listaRegistros():
+    lista = '\n\t***** Lista de Registros *****\n\n'
+    for r in registro:
+        lista += f"Mês-Ano Referência...: {r['mes_ano_referencia']}\n"
+        lista += f"Total de Habitantes..: {r['mes_ano_referencia']}\n"
+        lista += f"Total de Óbitos......: {r['total_obitos']}\n\n"
+
+    return lista
 
 repeat = True
 
@@ -104,8 +116,8 @@ while repeat:
         if aux == 'nao':
             repeat = False
     elif escolha == 4:
-        print("Opção número 4")
-        
+        print(listaRegistros())
+
         aux = input("Deseja continuar? (sim ou nao): ")
         if aux == 'nao':
             repeat = False
