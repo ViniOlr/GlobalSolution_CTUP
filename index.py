@@ -1,7 +1,16 @@
 registro = [{
-    'mes_ano_referencia' : '10-2022',
-    'total_habitantes' : 1000000,
-    'total_obitos' : 20000
+        'mes_ano_referencia' : '10-2022',
+        'total_habitantes' : 1000000,
+        'total_obitos' : 20000
+    },
+    {
+        'mes_ano_referencia': '08-2022', 
+        'total_habitantes': 100, 
+        'total_obitos': 10}, 
+    {
+        'mes_ano_referencia': '09-2022', 
+        'total_habitantes': 500, 
+        'total_obitos': 20
     }
 ]
 
@@ -12,9 +21,21 @@ def menuPrincipal():
 
 
 def cadastrandoMesAno(mesAno, tHab, tObi):
-    newDict = dict(zip(['mes_ano_referencia', 'total_habitantes', 'total_obitos'], [mesAno, tHab, tObi]))
+    newDict = dict(zip(['mes_ano_referencia', 'total_habitantes', 'total_obitos'], [mesAno, int(tHab), int(tObi)]))
     registro.append(newDict)
     print("***** Gravado com sucesso *****")
+
+def consultaMesAno(mesAno):
+    retorno = ''
+
+    for r in registro:
+        if r['mes_ano_referencia'] == mesAno:
+            retorno = r
+
+    if retorno == '':
+        return "\n\t***** Mês-ano não cadastrado! *****\n"
+    else:
+        return f"\n\tMês-ano..............: {retorno['mes_ano_referencia']}\n\tTotal de Habitantes..: {retorno['total_habitantes']}\n\tTotal de óbitos......: {retorno['total_obitos']}\n"
 
 repeat = True
 
@@ -22,7 +43,7 @@ while repeat:
     escolha = menuPrincipal()
     if escolha == 1:
         repeatEscolha1 = True
-        mesAno = input("Mês-ano..............: ")
+        mesAno = input("\nMês-ano..............: ")
         tHab   = input("Total de Habitantes..: ")
         tObi   = input("Total de óbitos......: ")
         cadastrandoMesAno(mesAno, tHab, tObi)
@@ -31,7 +52,9 @@ while repeat:
         if aux == 'nao':
             repeat = False
     elif escolha == 2:
-        print("Opção número 2")
+        mesAno = input("\nDigite o mês-ano desejado (mm-aaaa): ")
+        print(consultaMesAno(mesAno))
+        
         aux = input("Deseja continuar? (sim ou nao): ")
         if aux == 'nao':
             repeat = False
@@ -48,4 +71,4 @@ while repeat:
     else:
         print("\n\tOpção inválida, escolha entre 1, 2 ,3 ou 4\n")
 
-print(registro)
+# print(registro)
