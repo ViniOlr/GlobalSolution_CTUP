@@ -6,12 +6,28 @@ registro = [{
     {
         'mes_ano_referencia': '08-2022', 
         'total_habitantes': 100, 
-        'total_obitos': 10}, 
+        'total_obitos': 10
+    }, 
     {
         'mes_ano_referencia': '09-2022', 
         'total_habitantes': 500, 
         'total_obitos': 20
-    }
+    },
+    {
+        'mes_ano_referencia': '09-2021',
+        'total_habitantes': 567,
+        'total_obitos': 123
+    },
+    {
+        'mes_ano_referencia': '05-2021',
+        'total_habitantes': 345,
+        'total_obitos': 214
+    },
+    {
+        'mes_ano_referencia': '05-2019',
+        'total_habitantes': 1000,
+        'total_obitos': 10
+}
 ]
 
 def menuPrincipal():
@@ -37,6 +53,28 @@ def consultaMesAno(mesAno):
     else:
         return f"\n\tMês-ano..............: {retorno['mes_ano_referencia']}\n\tTotal de Habitantes..: {retorno['total_habitantes']}\n\tTotal de óbitos......: {retorno['total_obitos']}\n"
 
+def pesquisaAno(anoASerComparado):
+    totalHab = 0
+    totalObt = 0
+    taxaAno = 0
+    taxa2019 = 15.0
+    comparativo = 0
+
+    for r in registro:
+        ano = r['mes_ano_referencia'].split("-")[1]
+        if ano == str(anoASerComparado):
+            totalHab += r['total_habitantes']
+            totalObt += r['total_obitos']
+    
+    if totalHab != 0 and totalObt != 0:
+        print(f'\n\tTotal de Habitantes..............: {totalHab}')
+        print(f'\tTotal de óbitos..................: {totalObt}')
+        print(f'\tTaxa por 100k habitantes - {ano}..: {taxaAno}')
+        print(f'\tTaxa por 100k habitantes - 2019..: {taxa2019}')
+        print(f'\tComparativo % entre 2021-2019....: {comparativo}\n')
+    else:
+        print(f"\n\t***** Não há dados referente a este ano *****\n")
+
 repeat = True
 
 while repeat:
@@ -59,12 +97,15 @@ while repeat:
         if aux == 'nao':
             repeat = False
     elif escolha == 3:
-        print("Opção número 3")
-        aux = input("Deseja continuar? (sim ou nao): ")
+        anoASerPesquisado = input("Digite ano a ser comparado: ")
+        pesquisaAno(anoASerPesquisado)
+        
+        aux = input("\nDeseja continuar? (sim ou nao): ")
         if aux == 'nao':
             repeat = False
     elif escolha == 4:
         print("Opção número 4")
+        
         aux = input("Deseja continuar? (sim ou nao): ")
         if aux == 'nao':
             repeat = False
